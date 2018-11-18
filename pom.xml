@@ -1,0 +1,106 @@
+<project>
+    <modelVersion>4.0.0</modelVersion>
+    <groupId>com.menties.app</groupId>
+    <artifactId>hello</artifactId>
+    <version>1</version>
+    <packaging>war</packaging>
+
+    <dependencies>
+        <dependency>
+            <groupId>org.springframework</groupId>
+            <artifactId>spring-webmvc</artifactId>
+            <version>5.1.1.RELEASE</version>
+        </dependency>
+        <dependency>
+            <groupId>junit</groupId>
+            <artifactId>junit</artifactId>
+            <version>4.9</version>
+            <scope>test</scope>
+        </dependency>
+        <dependency>
+            <groupId>org.mockito</groupId>
+            <artifactId>mockito-all</artifactId>
+            <version>1.10.19</version>
+            <scope>test</scope>
+        </dependency>
+
+    </dependencies>
+
+    <build>
+        <sourceDirectory>src</sourceDirectory>
+        <testSourceDirectory>testsrc</testSourceDirectory>
+        <plugins>
+
+            <plugin>
+                <artifactId>maven-clean-plugin</artifactId>
+                <version>3.1.0</version>
+            </plugin>
+
+            <plugin>
+                <artifactId>maven-jar-plugin</artifactId>
+                <version>2.2</version>
+                <executions>
+                    <execution>
+                        <id>make a jar</id>
+                        <phase>package</phase>
+                        <goals>
+                            <goal>jar</goal>
+                        </goals>
+                    </execution>
+                </executions>
+                <configuration>
+                    <jarName>${name}</jarName>
+                    <outputDirectory>server/bin</outputDirectory>
+                </configuration>
+            </plugin>
+
+            <plugin>
+                <artifactId>maven-war-plugin</artifactId>
+                <version>3.2.2</version>
+                <executions>
+                    <execution>
+                        <id>make a war</id>
+                        <phase>package</phase>
+                        <goals>
+                            <goal>war</goal>
+                        </goals>
+                    </execution>
+                </executions>
+                <configuration>
+                    <warName>${name}</warName>
+                    <warSourceDirectory>web</warSourceDirectory>
+                    <outputDirectory>server/web</outputDirectory>
+                </configuration>
+            </plugin>
+
+            <plugin>
+                <groupId>ch.fortysix</groupId>
+                <artifactId>maven-postman-plugin</artifactId>
+                <executions>
+                    <execution>
+                        <id>send email</id>
+                        <phase>package</phase>
+                        <goals>
+                            <goal>surefire-mail</goal>
+                        </goals>
+                    </execution>
+                </executions>
+                <configuration>
+                    <from>me</from>
+                    <subject>Build notification</subject>
+                    <failonerror>false</failonerror>
+                    <mailhost>smtp.gmail.com</mailhost>
+                    <mailport>465</mailport>
+                    <mailssl>true</mailssl>
+                    <mailuser>vbnexus1@gmail.com</mailuser>
+                    <mailpassword>WNCVK7NQ</mailpassword>
+                    <receivers>
+                        <receiver>vitalii.boiko26@gmail.com</receiver>
+                    </receivers>
+                </configuration>
+            </plugin>
+
+        </plugins>
+    </build>
+
+</project>
